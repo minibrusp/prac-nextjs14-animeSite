@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
   Select,
   SelectContent,
@@ -7,10 +8,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/components/ui/select';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { Input } from '@/app/components/ui/input';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function Filter({ currentType }: { currentType: string }) {
-  const router = useRouter();
+  const { replace } = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
@@ -19,16 +21,27 @@ export default function Filter({ currentType }: { currentType: string }) {
     params.set('kind', selectedValue);
     console.log(params.get('kind'));
 
-    router.push(
-      `${pathname}?kind=${
-        selectedValue === 'tv,movie' ? 'tv,movie' : selectedValue
-      }`
-    );
+    replace(`${pathname}?${params.toString().replace('%2C', ',')}`);
   };
 
+  const searchAnime = useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set('search', term);
+    } else {
+      params.delete('search');
+    }
+    replace(`${pathname}?${params.toString().replace('%2C', ',')}`);
+  }, 300);
+
   return (
-    <div>
-      <Select onValueChange={selectFilter} defaultValue={currentType}>
+    <div className='flex justify-end items-center gap-4'>
+      <Input
+        type='text'
+        placeholder='by name not working DEPRECATED in API'
+        onChange={(e) => searchAnime(e.target.value)}
+      />
+      <Select onValueChange={selectFilter} value={currentType}>
         <SelectTrigger className='w-[180px] uppercase border border-primary text-primary inline-flex'>
           <SelectValue placeholder='tv / movie' />
         </SelectTrigger>
