@@ -6,9 +6,10 @@ import Loading from './loading';
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: { currentPage?: string };
+  searchParams?: { currentPage?: string; kind?: string };
 }) {
   const currentPage = Number(searchParams?.currentPage) || 1;
+  const currentType = searchParams?.kind || 'tv,movie';
 
   return (
     <main>
@@ -25,7 +26,7 @@ export default async function Home({
           />
         }
       >
-        <PopularAnimes currentPage={currentPage} />
+        <PopularAnimes currentPage={currentPage} currentType={currentType} />
       </Suspense>
     </main>
   );

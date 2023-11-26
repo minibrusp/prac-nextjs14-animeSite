@@ -5,7 +5,7 @@ import { Anime } from './type';
 
 const LIMIT_PER_PAGE = 10;
 
-export const fetchAnime = async (page: number) => {
+export const fetchAnime = async (page: number, type: string) => {
   // console.log('Fetching anime...');
   // await new Promise((resolve) => setTimeout(resolve, 3000));
 
@@ -15,7 +15,7 @@ export const fetchAnime = async (page: number) => {
   // );
 
   const result = await fetch(
-    `https://shikimori.one/api/animes?page=${page}&limit=${LIMIT_PER_PAGE}&order=popularity`
+    `https://shikimori.one/api/animes?page=${page}&limit=${LIMIT_PER_PAGE}&kind=${type}&order=popularity`
   );
 
   const animes = await result.json();

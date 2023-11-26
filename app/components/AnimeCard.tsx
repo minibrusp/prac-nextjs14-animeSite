@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import {
-  Card,
   CardHeader,
   CardFooter,
   CardTitle,
@@ -24,6 +23,10 @@ export default function AnimeCard({
   anime: Anime;
   index: number;
 }) {
+  const cardImage = anime.image.original
+    ? `https://shikimori.one${anime.image.original}`
+    : '/card_placeholder.webp';
+
   return (
     <MotionCard
       variants={variants}
@@ -39,7 +42,7 @@ export default function AnimeCard({
     >
       <CardHeader className='rounded rounded-b-none relative w-full h-[45vh] overflow-hidden'>
         <Image
-          src={`https://shikimori.one${anime.image.original}`}
+          src={cardImage}
           alt='anime image'
           fill
           className='rounded-md rounded-b-none aspect-auto hover:scale-[1.1] transition-[transform] duration-1000'
