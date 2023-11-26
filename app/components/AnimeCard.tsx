@@ -35,17 +35,17 @@ export default function AnimeCard({
         duration: 0.5,
       }}
       viewport={{ amount: 0 }}
-      className=' rounded relative w-full border-none gap'
+      className='rounded pb-4 relative w-full border border-transparent hover:border hover:border-primary-foreground hover:shadow-md'
     >
-      <CardHeader className='relative w-full h-[45vh]'>
+      <CardHeader className='rounded rounded-b-none relative w-full h-[45vh] overflow-hidden'>
         <Image
           src={`https://shikimori.one${anime.image.original}`}
           alt='anime image'
           fill
-          className='rounded-md aspect-auto'
+          className='rounded-md rounded-b-none aspect-auto hover:scale-[1.1] transition-[transform] duration-1000'
         />
       </CardHeader>
-      <CardContent className='my-4 flex justify-between items-center capitalize p-0'>
+      <CardContent className='my-4 flex justify-between items-center capitalize p-0 px-2'>
         <CardTitle>{anime.name}</CardTitle>
         <Badge variant='default'>
           <CardDescription className='text-secondary'>
@@ -53,7 +53,7 @@ export default function AnimeCard({
           </CardDescription>
         </Badge>
       </CardContent>
-      <CardFooter className='flex justify-between items-center p-0'>
+      <CardFooter className='flex justify-between items-center p-0 px-2'>
         <div className='flex flex-row gap-2 justify-center items-center'>
           <Image
             src='./episodes.svg'
