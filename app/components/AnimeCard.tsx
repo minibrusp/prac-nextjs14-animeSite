@@ -10,10 +10,33 @@ import {
 
 import { Badge } from '@/app/components/ui/badge';
 import { Anime } from '../lib/type';
+import { MotionCard } from './AnimeCard.motion';
 
-export default function AnimeCard({ anime }: { anime: Anime }) {
+const variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+export default function AnimeCard({
+  anime,
+  index,
+}: {
+  anime: Anime;
+  index: number;
+}) {
   return (
-    <Card className=' rounded relative w-full border-none gap'>
+    <MotionCard
+      variants={variants}
+      initial='hidden'
+      animate='visible'
+      transition={{
+        delay: index * 0.25,
+        ease: 'easeInOut',
+        duration: 0.5,
+      }}
+      viewport={{ amount: 0 }}
+      className=' rounded relative w-full border-none gap'
+    >
       <CardHeader className='relative w-full h-[45vh]'>
         <Image
           src={`https://shikimori.one${anime.image.original}`}
@@ -54,6 +77,6 @@ export default function AnimeCard({ anime }: { anime: Anime }) {
           <p className='text-base font-bold text-primary'>{anime.score}</p>
         </div>
       </CardFooter>
-    </Card>
+    </MotionCard>
   );
 }

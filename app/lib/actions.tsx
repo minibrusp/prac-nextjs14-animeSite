@@ -21,6 +21,6 @@ export const fetchAnime = async (page: number) => {
   const animes = await result.json();
 
   return animes?.map((anime: Anime, index: number) => (
-    <AnimeCard key={anime.id} anime={anime} />
+    <AnimeCard key={anime.id} anime={anime} index={index} />
   ));
 };
