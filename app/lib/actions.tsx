@@ -1,5 +1,6 @@
 'use server';
 
+import Link from 'next/link';
 import AnimeCard from '../components/AnimeCard';
 import { Anime } from './type';
 
@@ -21,6 +22,18 @@ export const fetchAnime = async (page: number, type: string) => {
   const animes = await result.json();
 
   return animes?.map((anime: Anime, index: number) => (
-    <AnimeCard key={anime.id} anime={anime} index={index} />
+    <Link key={anime.id} href={`/anime/${anime.id}`}>
+      <AnimeCard anime={anime} index={index} />
+    </Link>
   ));
+};
+
+export const fetchAnimeById = async (id: string) => {
+  const result = await fetch(`https://shikimori.one/api/animes/${id}`);
+
+  const data = await result.json();
+
+  console.log(data);
+
+  return data;
 };

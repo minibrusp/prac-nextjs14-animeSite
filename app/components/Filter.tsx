@@ -35,7 +35,7 @@ export default function Filter({ currentType }: { currentType: string }) {
   }, 300);
 
   return (
-    <div className='flex justify-end items-center gap-4'>
+    <div className='flex flex-row justify-end items-center gap-4 w-full md:w-[unset]'>
       <Input
         type='text'
         placeholder='by name not working DEPRECATED in API'

@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
-import { DM_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '@/app/components/Header';
-
-const dmSans = DM_Sans({ subsets: ['latin'] });
+import { dmSans } from '@/app/components/ui/fonts';
 
 export const metadata: Metadata = {
   title: 'Create Next App',

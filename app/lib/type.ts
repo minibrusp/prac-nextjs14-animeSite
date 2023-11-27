@@ -10,3 +10,11 @@ export type Anime = {
   episodes_aired: number;
   score: string;
 };
+
+export type animeGenre = {
+  id: number;
+  name: string;
+  russian: string;
+  kind: string;
+  entry_type: string;
+};
