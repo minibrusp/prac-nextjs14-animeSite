@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import AnimeCard from '../components/AnimeCard';
 import { Anime } from './type';
+import { ApiError } from 'next/dist/server/api-utils';
 
 const LIMIT_PER_PAGE = 10;
 const BASE_URL = 'https://api.jikan.moe/v4';
@@ -30,7 +31,7 @@ export const fetchAnime = async (
     // console.log(
     //   '***********************************************************************************'
     // );
-    console.log(animes.data);
+    // console.log(animes.data);
     // console.log(
     //   '***********************************************************************************'
     // );
@@ -42,8 +43,8 @@ export const fetchAnime = async (
         </Link>
       ));
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    throw new Error(error);
   }
 };
 

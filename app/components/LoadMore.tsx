@@ -2,7 +2,7 @@
 
 import { useInView } from 'react-intersection-observer';
 import Spinner from './ui/Spinner';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { fetchAnime } from '../lib/actions';
 import { useSearchParams } from 'next/navigation';
 
