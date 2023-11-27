@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import AnimeCard from '../components/AnimeCard';
 import { Anime } from './type';
-import { ApiError } from 'next/dist/server/api-utils';
 
 const LIMIT_PER_PAGE = 10;
 const BASE_URL = 'https://api.jikan.moe/v4';
@@ -21,20 +20,12 @@ export const fetchAnime = async (
   try {
     const result = await fetch(
       `${searchURL}?page=${page}&limit=${LIMIT_PER_PAGE}
-      ${type !== 'all' ? '&type=' + type : ''}
       ${search !== '' ? '&q=' + search : ''}
+      ${type !== 'all' ? '&type=' + type : ''}
       `
     );
 
     const animes = await result.json();
-
-    // console.log(
-    //   '***********************************************************************************'
-    // );
-    // console.log(animes.data);
-    // console.log(
-    //   '***********************************************************************************'
-    // );
 
     if (result.ok) {
       return animes.data?.map((anime: Anime, index: number) => (
@@ -44,16 +35,24 @@ export const fetchAnime = async (
       ));
     }
   } catch (error: any) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 };
 
 export const fetchAnimeById = async (id: string) => {
-  const result = await fetch(`https://shikimori.one/api/animes/${id}`);
+  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
 
-  const data = await result.json();
+  const anime = await result.json();
 
-  console.log(data);
+  return anime.data;
+};
 
-  return data;
+export const fetchAnimePhotosById = async (id: string) => {
+  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/pictures`);
+
+  const animePhotos = await result.json();
+
+  console.log(animePhotos.data);
+
+  return animePhotos.data;
 };

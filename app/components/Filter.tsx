@@ -20,7 +20,6 @@ export default function Filter({ currentType }: { currentType: string }) {
   const selectFilter = (selectedValue: animeType) => {
     const params = new URLSearchParams(searchParams);
     params.set('type', selectedValue);
-    console.log(params.get('type'));
 
     replace(`${pathname}?${params.toString().replace('%2C', ',')}`);
   };
@@ -39,7 +38,7 @@ export default function Filter({ currentType }: { currentType: string }) {
     <div className='flex flex-row justify-end items-center gap-4 w-full md:w-[unset]'>
       <Input
         type='text'
-        placeholder='by name not working DEPRECATED in API'
+        placeholder='search anime by name'
         onChange={(e) => searchAnime(e.target.value)}
       />
       {/* "" | "tv" | "movie" | "ova" | "special" | "ona" | "music" */}

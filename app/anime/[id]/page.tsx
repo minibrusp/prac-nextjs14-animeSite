@@ -1,5 +1,6 @@
 import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import Anime from '@/app/components/ui/anime/Anime';
+import AnimePhotos from '@/app/components/ui/anime/AnimePhotos';
 import Loading from '@/app/loading';
 import React, { Suspense } from 'react';
 
@@ -18,14 +19,11 @@ export default function page({ params }: { params: { id: string } }) {
         ]}
       />
 
-      <Suspense
-        fallback={
-          <Loading
-            text={<p className='text-primary tracking-widest'>loading anime</p>}
-          />
-        }
-      >
+      <Suspense fallback={<Loading />}>
         <Anime id={id} />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <AnimePhotos id={id} />
       </Suspense>
     </main>
   );

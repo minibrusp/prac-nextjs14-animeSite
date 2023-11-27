@@ -1,57 +1,50 @@
-import { fetchAnimeById } from '@/app/lib/actions';
+import { fetchAnimeById, fetchAnimePhotosById } from '@/app/lib/actions';
 import { Badge } from '../badge';
-import { animeGenre, animeScreenshot } from '@/app/lib/type';
+import { Anime as TypeAnime } from '@/app/lib/type';
 import Image from 'next/image';
 
 export default async function Anime({ id }: { id: string }) {
-  const anime = await fetchAnimeById(id);
-
-  const markup = { __html: anime.description_html };
+  const anime: TypeAnime = await fetchAnimeById(id);
 
   return (
     <section>
-      <h1 className='text-3xl tracking-wider'>{anime.name}</h1>
+      <h1 className='text-3xl tracking-wider'>{anime.title}</h1>
       <ul className='flex flex-wrap gap-2 py-2 uppercase font-bold text-xs'>
-        <Badge>{anime.kind}</Badge>
-        <Badge>{anime.status}</Badge>
+        <li>
+          <Badge>{anime.type}</Badge>
+        </li>
+        <li>
+          <Badge>{anime.status}</Badge>
+        </li>
+        <li>
+          <Badge>{anime.rating}</Badge>
+        </li>
+        <li>
+          <Badge>{anime.duration}</Badge>
+        </li>
+        <li>
+          <Badge>{anime.episodes} Episodes</Badge>
+        </li>
+        <li>
+          <Badge>{anime.year}</Badge>
+        </li>
+        <li>
+          <Badge>{anime.season}</Badge>
+        </li>
       </ul>
       <div className='my-2 max-w-xs w-full h-[45vh] relative'>
-        <Image
-          src={`https://shikimori.one${anime.image.original}`}
-          alt={'anime image'}
-          fill
-        />
+        <Image src={anime.images.webp.image_url} alt={'anime image'} fill />
       </div>
       <ul className='flex flex-wrap gap-2 py-4 text-xs'>
-        {anime.genres.map((genre: animeGenre, index: number) => (
-          <Badge key={genre.id} variant={'default'}>
+        {anime.genres.map((genre, index: number) => (
+          <Badge key={genre.mal_id} variant={'default'}>
             {genre.name}
           </Badge>
         ))}
       </ul>
 
-      <div dangerouslySetInnerHTML={markup}></div>
-
       <div>
-        <h2 className='text-lg capitalize tracking-wide font-semibold'>
-          screenshots
-        </h2>
-        <ul className='flex flex-row gap-4 my-2'>
-          {anime.screenshots.map(
-            (screenshot: animeScreenshot, index: number) => (
-              <li key={index}>
-                <Image
-                  src={`https://shikimori.one${screenshot.preview}`}
-                  alt={`anime screenshot image ${index + 1}`}
-                  width={150}
-                  height={150}
-                  placeholder='blur'
-                  blurDataURL={`https://shikimori.one${screenshot.preview}`}
-                />
-              </li>
-            )
-          )}
-        </ul>
+        <p>{anime.synopsis}</p>
       </div>
     </section>
   );

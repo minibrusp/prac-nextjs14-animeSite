@@ -1,29 +1,3 @@
-// export type Anime = {
-//   id: string;
-//   name: string;
-//   image: {
-//     original: string;
-//     preview: string;
-//   };
-//   kind: string;
-//   episodes: number;
-//   episodes_aired: number;
-//   score: string;
-// };
-
-export type animeGenre = {
-  id: number;
-  name: string;
-  russian: string;
-  kind: string;
-  entry_type: string;
-};
-
-export type animeScreenshot = {
-  original: string;
-  preview: string;
-};
-
 export enum animeRating {
   'g' = 'G - All Ages',
   'pg' = 'PG - Children',
@@ -32,6 +6,19 @@ export enum animeRating {
   'r' = 'R+ - Mild Nudity',
   'rx' = 'Rx - Hentai',
 }
+
+export type animeImage = {
+  jpg: {
+    image_url: 'string';
+    small_image_url: 'string';
+    large_image_url: 'string';
+  };
+  webp: {
+    image_url: 'string';
+    small_image_url: 'string';
+    large_image_url: 'string';
+  };
+};
 
 export type date = {
   day: number;
@@ -48,27 +35,23 @@ export type animeType =
   | 'ona'
   | 'music';
 
+export type airingStatus =
+  | 'Finished Airing'
+  | 'Currently Airing'
+  | 'Not yet aired';
+
+export type animeSeason = 'summer' | 'winter' | 'spring' | 'fall';
+
 export type Anime = {
   mal_id: number;
   url: 'string';
-  images: {
-    jpg: {
-      image_url: 'string';
-      small_image_url: 'string';
-      large_image_url: 'string';
-    };
-    webp: {
-      image_url: 'string';
-      small_image_url: 'string';
-      large_image_url: 'string';
-    };
-  };
+  images: animeImage;
   trailer: {
     youtube_id: 'string';
     url: 'string';
     embed_url: 'string';
   };
-  approved: true;
+  approved: boolean;
   titles: [
     {
       type: 'string';
@@ -82,8 +65,8 @@ export type Anime = {
   type: animeType;
   source: 'string';
   episodes: number;
-  status: 'Finished Airing';
-  airing: true;
+  status: airingStatus;
+  airing: boolean;
   aired: {
     from: 'string';
     to: 'string';
@@ -103,7 +86,7 @@ export type Anime = {
   favorites: number;
   synopsis: 'string';
   background: 'string';
-  season: 'summer';
+  season: animeSeason;
   year: number;
   broadcast: {
     day: 'string';
