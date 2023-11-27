@@ -18,3 +18,8 @@ export type animeGenre = {
   kind: string;
   entry_type: string;
 };
+
+export type animeScreenshot = {
+  original: string;
+  preview: string;
+};

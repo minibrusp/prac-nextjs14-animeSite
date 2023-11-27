@@ -1,6 +1,6 @@
 import { fetchAnimeById } from '@/app/lib/actions';
 import { Badge } from '../badge';
-import { animeGenre } from '@/app/lib/type';
+import { animeGenre, animeScreenshot } from '@/app/lib/type';
 import Image from 'next/image';
 
 export default async function Anime({ id }: { id: string }) {
@@ -37,18 +37,20 @@ export default async function Anime({ id }: { id: string }) {
           screenshots
         </h2>
         <ul className='flex flex-row gap-4 my-2'>
-          {anime.screenshots.map((screenshot: string, index: number) => (
-            <li key={index}>
-              <Image
-                src={`https://shikimori.one${screenshot.original}`}
-                alt={`anime screenshot image ${index + 1}`}
-                width={150}
-                height={150}
-                placeholder='blur'
-                blurDataURL={`https://shikimori.one${screenshot.preview}`}
-              />
-            </li>
-          ))}
+          {anime.screenshots.map(
+            (screenshot: animeScreenshot, index: number) => (
+              <li key={index}>
+                <Image
+                  src={`https://shikimori.one${screenshot.preview}`}
+                  alt={`anime screenshot image ${index + 1}`}
+                  width={150}
+                  height={150}
+                  placeholder='blur'
+                  blurDataURL={`https://shikimori.one${screenshot.preview}`}
+                />
+              </li>
+            )
+          )}
         </ul>
       </div>
     </section>
