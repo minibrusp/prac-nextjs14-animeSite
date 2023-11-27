@@ -6,11 +6,13 @@ import Filter from './Filter';
 export default async function PopularAnimes({
   currentPage,
   currentType,
+  currentSearch,
 }: {
   currentPage: number;
   currentType: string;
+  currentSearch: string;
 }) {
-  const result = await fetchAnime(currentPage, currentType);
+  const result = await fetchAnime(currentPage, currentType, currentSearch);
   return (
     <>
       <div className='p-4 mx-auto max-w-[1440px] border-b-2 border-accent mb-4 flex flex-col sm:flex-row justify-between items-center gap-4'>

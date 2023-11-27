@@ -23,9 +23,9 @@ export default function AnimeCard({
   anime: Anime;
   index: number;
 }) {
-  const cardImage = anime.image.original
-    ? `https://shikimori.one${anime.image.original}`
-    : '/card_placeholder.webp';
+  // const cardImage = anime.image.original
+  //   ? `https://shikimori.one${anime.image.original}`
+  //   : '/card_placeholder.webp';
 
   return (
     <MotionCard
@@ -42,17 +42,18 @@ export default function AnimeCard({
     >
       <CardHeader className='rounded rounded-b-none relative w-full h-[45vh] overflow-hidden'>
         <Image
-          src={cardImage}
+          src={anime.images.webp.image_url}
           alt='anime image'
           fill
           className='rounded-md rounded-b-none aspect-auto hover:scale-[1.1] transition-[transform] duration-1000'
+          sizes='object-fit'
         />
       </CardHeader>
       <CardContent className='my-4 flex justify-between items-center capitalize p-0 px-2'>
-        <CardTitle>{anime.name}</CardTitle>
+        <CardTitle>{anime.title}</CardTitle>
         <Badge variant='default'>
           <CardDescription className='text-secondary'>
-            {anime.kind}
+            {anime.type}
           </CardDescription>
         </Badge>
       </CardContent>
@@ -65,9 +66,7 @@ export default function AnimeCard({
             height={20}
             className='object-contain'
           />
-          <p className='text-base font-bold'>
-            {anime.episodes || anime.episodes_aired}
-          </p>
+          <p className='text-base font-bold'>{anime.episodes}</p>
         </div>
         <div className='flex flex-row gap-2 justify-center items-center'>
           <Image

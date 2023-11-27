@@ -5,27 +5,46 @@ import AnimeCard from '../components/AnimeCard';
 import { Anime } from './type';
 
 const LIMIT_PER_PAGE = 10;
+const BASE_URL = 'https://api.jikan.moe/v4';
 
-export const fetchAnime = async (page: number, type: string) => {
+export const fetchAnime = async (
+  page: number,
+  type: string,
+  search?: string
+) => {
   // console.log('Fetching anime...');
   // await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  const newLimit = page * LIMIT_PER_PAGE;
-  // const result = await fetch(
-  //   `https://shikimori.one/api/animes?page=${1}&limit=${newLimit}&order=popularity`
-  // );
+  let searchURL = search === '' ? `${BASE_URL}/top/anime` : `${BASE_URL}/anime`;
 
-  const result = await fetch(
-    `https://shikimori.one/api/animes?page=${page}&limit=${LIMIT_PER_PAGE}&kind=${type}&order=popularity`
-  );
+  try {
+    const result = await fetch(
+      `${searchURL}?page=${page}&limit=${LIMIT_PER_PAGE}
+      ${type !== 'all' ? '&type=' + type : ''}
+      ${search !== '' ? '&q=' + search : ''}
+      `
+    );
 
-  const animes = await result.json();
+    const animes = await result.json();
 
-  return animes?.map((anime: Anime, index: number) => (
-    <Link key={anime.id} href={`/anime/${anime.id}`}>
-      <AnimeCard anime={anime} index={index} />
-    </Link>
-  ));
+    // console.log(
+    //   '***********************************************************************************'
+    // );
+    console.log(animes.data);
+    // console.log(
+    //   '***********************************************************************************'
+    // );
+
+    if (result.ok) {
+      return animes.data?.map((anime: Anime, index: number) => (
+        <Link key={`${anime.mal_id}-${index}`} href={`/anime/${anime.mal_id}`}>
+          <AnimeCard anime={anime} index={index} />
+        </Link>
+      ));
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const fetchAnimeById = async (id: string) => {
