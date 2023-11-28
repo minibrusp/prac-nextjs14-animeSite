@@ -52,7 +52,17 @@ export const fetchAnimePhotosById = async (id: string) => {
 
   const animePhotos = await result.json();
 
-  console.log(animePhotos.data);
+  // console.log(animePhotos.data);
 
   return animePhotos.data;
+};
+
+export const fetchAnimeTrailersById = async (id: string) => {
+  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/videos`);
+
+  const animeTrailers = await result.json();
+
+  console.log(animeTrailers.data.promo);
+
+  return animeTrailers.data;
 };
