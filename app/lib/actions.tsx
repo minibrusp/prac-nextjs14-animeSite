@@ -62,7 +62,5 @@ export const fetchAnimeTrailersById = async (id: string) => {
 
   const animeTrailers = await result.json();
 
-  console.log(animeTrailers.data.promo);
-
   return animeTrailers.data;
 };
