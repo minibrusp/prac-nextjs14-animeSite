@@ -14,15 +14,18 @@ export default function Breadcrumbs({
   breadcrumbs: Breadcrumb[];
 }) {
   return (
-    <nav aria-label='Breadcrumb' className='mb-6 block '>
-      <ol className={clsx(dmSans.className, 'flex text-xl md:text-2xl')}>
+    <nav aria-label='Breadcrumb' className='mb-3 block '>
+      <ol
+        className={clsx(
+          dmSans.className,
+          'flex text-sm tracking-widest md:text-2xl'
+        )}
+      >
         {breadcrumbs.map((breadcrumb, index) => (
           <li
             key={breadcrumb.href}
             aria-current={breadcrumb.active}
-            className={clsx(
-              breadcrumb.active ? 'text-gray-900' : 'text-gray-500'
-            )}
+            className={clsx(breadcrumb.active ? 'text-primary' : 'text-accent')}
           >
             <Link href={breadcrumb.href}>{breadcrumb.label}</Link>
             {index < breadcrumbs.length - 1 ? (

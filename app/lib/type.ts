@@ -20,6 +20,42 @@ export type animeImage = {
   };
 };
 
+type identity = {
+  mal_id: number;
+  url: string;
+  images?: animeImage;
+  name: string;
+  type?: string;
+};
+
+export type animeCharacter = identity;
+
+export type person = animeCharacter;
+
+export type voiceActor = {
+  person: person;
+  language: string;
+};
+
+export type animeStaff = {
+  person: person;
+  positions: string[];
+};
+
+export type animeCharacterWithVoiceActor = {
+  character: animeCharacter;
+  role: string;
+  voice_actors: voiceActor[];
+};
+
+export type Producer = identity;
+
+export type Lincensor = identity;
+
+export type Studio = identity;
+
+export type Genre = identity;
+
 export type date = {
   day: number;
   month: number;
@@ -166,4 +202,36 @@ export type animeTrailer = {
       maximum_image_url: 'string';
     };
   };
+};
+
+export type user = {
+  username: string;
+  url: string;
+  images: animeImage;
+};
+
+export type reaction = {
+  overall: number;
+  nice: number;
+  love_it: number;
+  funny: number;
+  confusing: number;
+  informative: number;
+  well_written: number;
+  creative: number;
+};
+
+export type animeReview = {
+  user: user;
+  mal_id: number;
+  url: string;
+  type: string;
+  reactions: reaction;
+  date: string;
+  review: string;
+  score: string;
+  tags: string[];
+  is_spoiler: boolean;
+  is_preliminary: boolean;
+  episodes_watched: number;
 };

@@ -16,10 +16,12 @@ export default async function AnimeTrailers({ id }: { id: string }) {
 
   if (trailers.length > 0)
     return (
-      <section className='my-4 mb-4'>
-        <h1 className='text-2xl tracking-wide my-2 border-b border-primary'>
-          Video sneek peaks
-        </h1>
+      <section className='my-4 mb-8'>
+        <div className='my-4'>
+          <h1 className='text-primary text-xl tracking-wider font-medium '>
+            Video sneek peaks
+          </h1>
+        </div>
         <div className=''>
           <Accordion
             type='single'
@@ -30,9 +32,9 @@ export default async function AnimeTrailers({ id }: { id: string }) {
               <AccordionItem
                 value={`${trailer.title}`}
                 key={index}
-                className='w-full'
+                className='w-full border-b border-accent px-4'
               >
-                <AccordionTrigger>{`${trailer.title}`}</AccordionTrigger>
+                <AccordionTrigger className='text-xs tracking-wider font-normal text-primary'>{`${trailer.title}`}</AccordionTrigger>
                 <AccordionContent>
                   <iframe
                     src={trailer.trailer.embed_url}

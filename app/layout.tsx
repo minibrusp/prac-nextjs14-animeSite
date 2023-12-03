@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/app/components/Header';
 import { dmSans } from '@/app/components/ui/fonts';
+import clsx from 'clsx';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={dmSans.className}>
+      <body className={clsx(dmSans.className, 'bg-secondary text-primary')}>
         <Header />
         {children}
       </body>

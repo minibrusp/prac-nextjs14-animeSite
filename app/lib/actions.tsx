@@ -64,3 +64,27 @@ export const fetchAnimeTrailersById = async (id: string) => {
 
   return animeTrailers.data;
 };
+
+export const fetchCharacterWithVActorByAnimeId = async (id: string) => {
+  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/characters`);
+
+  const animeChar = await result.json();
+
+  return animeChar.data;
+};
+
+export const fetchAnimeStaffs = async (id: string) => {
+  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/staff`);
+
+  const staffs = await result.json();
+
+  return staffs.data;
+};
+
+export const fetchAnimeReviews = async (id: string) => {
+  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/reviews`);
+
+  const reviews = await result.json();
+
+  return reviews.data;
+};
