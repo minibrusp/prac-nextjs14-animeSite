@@ -12,7 +12,7 @@ export default async function AnimePhotos({
 }) {
   const animePhotos: animeImage[] = await fetchAnimePhotosById(id);
 
-  const filteredAnimePhotos = await animePhotos.filter(
+  const filteredAnimePhotos = await animePhotos?.filter(
     (char: animeImage, index: number) => {
       return limit >= index + 1;
     }
@@ -27,7 +27,7 @@ export default async function AnimePhotos({
         <Link
           href={`/anime/${id}/photos`}
           className='text-xs font-normal text-accent'
-        >{`> All photos (${animePhotos.length})`}</Link>
+        >{`> All photos (${animePhotos?.length})`}</Link>
       </div>
       <div className='flex flex-row flex-wrap items-center justify-center gap-2'>
         {filteredAnimePhotos?.map((photo: animeImage, index: number) => (

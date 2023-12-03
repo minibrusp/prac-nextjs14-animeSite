@@ -9,12 +9,14 @@ import {
 import { animeTrailer } from '@/app/lib/type';
 
 export default async function AnimeTrailers({ id }: { id: string }) {
-  const { promo: trailers }: { promo: animeTrailer[] } =
-    await fetchAnimeTrailersById(id);
+  // const { promo: trailers }: { promo: animeTrailer[] } =
+  //   await fetchAnimeTrailersById(id);
+  const data = await fetchAnimeTrailersById(id);
+  const trailers = data?.promo;
 
-  if (trailers.length === 0) return <div></div>;
+  if (trailers?.length === 0) return <div></div>;
 
-  if (trailers.length > 0)
+  if (trailers?.length > 0)
     return (
       <section className='my-4 mb-8'>
         <div className='my-4'>
@@ -32,13 +34,13 @@ export default async function AnimeTrailers({ id }: { id: string }) {
               <AccordionItem
                 value={`${trailer.title}`}
                 key={index}
-                className='w-full border-b border-accent px-4'
+                className='w-full border-b border-accent'
               >
-                <AccordionTrigger className='text-xs tracking-wider font-normal text-primary'>{`${trailer.title}`}</AccordionTrigger>
+                <AccordionTrigger className='text-xs tracking-wider font-normal text-primary px-4'>{`${trailer.title}`}</AccordionTrigger>
                 <AccordionContent>
                   <iframe
                     src={trailer.trailer.embed_url}
-                    className='aspect-video h-[200px]'
+                    className='aspect-video h-[200px] w-full'
                     allowFullScreen={true}
                   />
                 </AccordionContent>

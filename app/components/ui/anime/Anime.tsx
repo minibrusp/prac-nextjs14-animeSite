@@ -15,44 +15,58 @@ export default async function Anime({ id }: { id: string }) {
 
   // console.log(anime);
 
+  if (!anime) return <div></div>;
+
   return (
     <section>
       <div className='my-2 max-w-xs w-full h-[480px] relative'>
         <Image
-          src={anime.images.webp.large_image_url}
+          src={anime.images?.webp.large_image_url}
           alt={'anime image'}
           fill
         />
       </div>
       <ul className='flex flex-wrap gap-2 py-2 uppercase font-bold text-xs'>
-        <li>
-          <Badge className='text-xs'>{anime.type}</Badge>
-        </li>
-        <li>
-          <Badge className='text-xs'>
-            {anime.season}
-            {anime.year}
-          </Badge>
-        </li>
-        <li>
-          <Badge className='text-xs'>{anime.status}</Badge>
-        </li>
+        {anime.type && (
+          <li>
+            <Badge className='text-xs'>{anime.type}</Badge>
+          </li>
+        )}
+        {anime.season && (
+          <li>
+            <Badge className='text-xs'>
+              {anime.season}
+              {anime.year}
+            </Badge>
+          </li>
+        )}
+        {anime.status && (
+          <li>
+            <Badge className='text-xs'>{anime.status}</Badge>
+          </li>
+        )}
       </ul>
       <h1 className='text-2xl tracking-wide leading-6 font-medium py-2'>
         {anime.title}
       </h1>
-      <div>
-        <p className='text-xs tracking-widest'>{anime.synopsis}</p>
-      </div>
 
-      <div>
-        <h2 className='py-4 text-xl tracking-wider font-medium'>Trailer</h2>
-        <iframe
-          src={anime.trailer.embed_url}
-          className='aspect-video h-[200px] block w-full'
-          allowFullScreen={true}
-        />
-      </div>
+      {/* synopsis  */}
+      {anime.synopsis && (
+        <div>
+          <p className='text-xs tracking-widest'>{anime.synopsis}</p>
+        </div>
+      )}
+
+      {anime.trailer.embed_url && (
+        <div>
+          <h2 className='py-4 text-xl tracking-wider font-medium'>Trailer</h2>
+          <iframe
+            src={anime.trailer.embed_url}
+            className='aspect-video h-[200px] block w-full'
+            allowFullScreen={true}
+          />
+        </div>
+      )}
 
       <div>
         <h2 className='py-4 text-xl tracking-wider font-medium'>More Info</h2>
@@ -65,6 +79,7 @@ export default async function Anime({ id }: { id: string }) {
             <dd className='bg-secondary text-primary px-3 py-2 border-b border-accent'>
               {anime.title}
             </dd>
+
             {/* official title */}
             <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
               Official Title
@@ -72,6 +87,7 @@ export default async function Anime({ id }: { id: string }) {
             <dd className='bg-secondary text-primary px-3 py-2 border-b border-accent'>
               {anime.title}
             </dd>
+
             {/* japanses title */}
             <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
               Japanese Title
@@ -79,6 +95,7 @@ export default async function Anime({ id }: { id: string }) {
             <dd className='bg-secondary text-primary px-3 py-2 border-b border-accent'>
               {anime.title_japanese}
             </dd>
+
             {/* type  */}
             <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
               Type
@@ -86,13 +103,19 @@ export default async function Anime({ id }: { id: string }) {
             <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
               {anime.type}
             </dd>
+
             {/* episodes  */}
-            <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
-              Episodes
-            </dt>
-            <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
-              {anime.episodes}
-            </dd>
+            {anime.episodes && (
+              <>
+                <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
+                  Episodes
+                </dt>
+                <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
+                  {anime.episodes}
+                </dd>
+              </>
+            )}
+
             {/* status  */}
             <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
               Status
@@ -100,6 +123,7 @@ export default async function Anime({ id }: { id: string }) {
             <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
               {anime.status}
             </dd>
+
             {/* aired  */}
             <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
               Aired
@@ -107,32 +131,50 @@ export default async function Anime({ id }: { id: string }) {
             <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
               {formatDate(anime.aired.from)} to {formatDate(anime.aired.to)}
             </dd>
+
             {/* premiered  */}
-            <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
-              Premiered
-            </dt>
-            <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
-              {anime.season.toUpperCase()} {anime.year}
-            </dd>
+            {anime.season && (
+              <>
+                <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
+                  Premiered
+                </dt>
+                <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
+                  {anime.season?.toUpperCase()} {anime.year}
+                </dd>
+              </>
+            )}
+
             {/* boradcast  */}
-            <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
-              Broadcast
-            </dt>
-            <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
-              {anime.broadcast.string}
-            </dd>
+            {anime.broadcast.string && (
+              <>
+                <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
+                  Broadcast
+                </dt>
+                <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
+                  {anime.broadcast.string}
+                </dd>
+              </>
+            )}
+
             {/* producers  */}
-            <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
-              Producers
-            </dt>
-            <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
-              {anime.producers.map((producer: TypeProducer, index: number) => (
-                <span key={index}>
-                  {producer.name}
-                  {addComma(index, anime.producers.length)}
-                </span>
-              ))}
-            </dd>
+            {anime.producers.length > 0 && (
+              <>
+                <dt className='text-center bg-primary text-secondary px-3 py-2 flex justify-center items-center border-b border-accent'>
+                  Producers
+                </dt>
+                <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
+                  {anime.producers.map(
+                    (producer: TypeProducer, index: number) => (
+                      <span key={index}>
+                        {producer.name}
+                        {addComma(index, anime.producers.length)}
+                      </span>
+                    )
+                  )}
+                </dd>
+              </>
+            )}
+
             {/* licensors  */}
             {anime.licensors.length > 0 && (
               <>
@@ -220,38 +262,6 @@ export default async function Anime({ id }: { id: string }) {
           </dl>
         </div>
       </div>
-
-      {/* <ul className='flex flex-wrap gap-2 py-2 uppercase font-bold text-xs'>
-        <li>
-          <Badge>{anime.type}</Badge>
-        </li>
-        <li>
-          <Badge>{anime.status}</Badge>
-        </li>
-        <li>
-          <Badge>{anime.rating}</Badge>
-        </li>
-        <li>
-          <Badge>{anime.duration}</Badge>
-        </li>
-        <li>
-          <Badge>{anime.episodes} Episodes</Badge>
-        </li>
-        <li>
-          <Badge>{anime.year}</Badge>
-        </li>
-        <li>
-          <Badge>{anime.season}</Badge>
-        </li>
-      </ul>
-
-      <ul className='flex flex-wrap gap-2 py-4 text-xs'>
-        {anime.genres.map((genre, index: number) => (
-          <Badge key={genre.mal_id} variant={'default'}>
-            {genre.name}
-          </Badge>
-        ))}
-      </ul> */}
     </section>
   );
 }
