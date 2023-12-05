@@ -40,51 +40,83 @@ export const fetchAnime = async (
 };
 
 export const fetchAnimeById = async (id: string) => {
-  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
+  try {
+    const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
 
-  const anime = await result.json();
+    const anime = await result.json();
 
-  return anime.data;
+    return anime.data;
+  } catch (error: any) {
+    console.error('api error:', error);
+    throw new Error('Failed to fetch anime.');
+  }
 };
 
 export const fetchAnimePhotosById = async (id: string) => {
-  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/pictures`);
+  try {
+    const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/pictures`);
 
-  const animePhotos = await result.json();
+    const animePhotos = await result.json();
 
-  // console.log(animePhotos.data);
+    // console.log(animePhotos.data);
 
-  return animePhotos.data;
+    return animePhotos.data;
+  } catch (error: any) {
+    console.error('api error:', error);
+    throw new Error('Failed to fetch anime photos.');
+  }
 };
 
 export const fetchAnimeTrailersById = async (id: string) => {
-  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/videos`);
+  try {
+    const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/videos`);
 
-  const animeTrailers = await result.json();
+    const animeTrailers = await result.json();
 
-  return animeTrailers.data;
+    return animeTrailers.data;
+  } catch (error: any) {
+    console.error('api error:', error);
+    throw new Error('Failed to fetch anime trailers.');
+  }
 };
 
 export const fetchCharacterWithVActorByAnimeId = async (id: string) => {
-  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/characters`);
+  try {
+    const result = await fetch(
+      `https://api.jikan.moe/v4/anime/${id}/characters`
+    );
 
-  const animeChar = await result.json();
+    const animeChar = await result.json();
 
-  return animeChar.data;
+    return animeChar.data;
+  } catch (error: any) {
+    console.error('api error:', error);
+    throw new Error('Failed to fetch anime characters.');
+  }
 };
 
 export const fetchAnimeStaffs = async (id: string) => {
-  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/staff`);
+  try {
+    const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/staff`);
 
-  const staffs = await result.json();
+    const staffs = await result.json();
 
-  return staffs.data;
+    return staffs.data;
+  } catch (error: any) {
+    console.error('api error:', error);
+    throw new Error('Failed to fetch anime staffs.');
+  }
 };
 
 export const fetchAnimeReviews = async (id: string) => {
-  const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/reviews`);
+  try {
+    const result = await fetch(`https://api.jikan.moe/v4/anime/${id}/reviews`);
 
-  const reviews = await result.json();
+    const reviews = await result.json();
 
-  return reviews.data;
+    return reviews.data;
+  } catch (error: any) {
+    console.error('api error:', error);
+    throw new Error('Failed to fetch anime reviews.');
+  }
 };

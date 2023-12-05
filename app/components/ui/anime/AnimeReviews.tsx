@@ -22,6 +22,34 @@ export default async function AnimeReviews({
 
   // console.log(animeReviews[0]);
 
+  if (filteredAnimeReviews?.length === undefined)
+    return (
+      <section className='my-4 mb-8'>
+        <div className='flex justify-between items-center my-4'>
+          <h2 className='text-primary text-xl tracking-wider font-medium '>
+            Reviews
+          </h2>
+          <Link
+            href={`/anime/${id}/photos`}
+            className='text-xs font-normal text-accent'
+          >{`> All photos (${animeReviews?.length})`}</Link>
+        </div>
+        <div className='flex flex-row flex-wrap items-center justify-center gap-2'>
+          {animeReviews?.length === undefined && (
+            <>
+              <p className='text-xs text-accent tracking-wider text-center'>
+                could not load reviews please reload the page...
+              </p>
+              <a
+                href={`/anime/${id}`}
+                className='text-xs font-normal text-accent'
+              >{`> reload page`}</a>
+            </>
+          )}
+        </div>
+      </section>
+    );
+
   return (
     <>
       {filteredAnimeReviews?.length > 0 && (

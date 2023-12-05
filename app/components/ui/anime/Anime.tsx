@@ -9,59 +9,79 @@ import {
 } from '@/app/lib/type';
 import Image from 'next/image';
 import { addComma, formatDate } from '@/lib/utils';
+import Link from 'next/link';
 
 export default async function Anime({ id }: { id: string }) {
   const anime: TypeAnime = await fetchAnimeById(id);
 
   // console.log(anime);
 
-  if (!anime) return <div></div>;
+  // if (!anime) throw new Error('could not fetch anime');
+
+  if (!anime)
+    return (
+      <section>
+        <div className='flex flex-row flex-wrap items-center justify-center gap-2'>
+          {anime === undefined && (
+            <>
+              <p className='text-xs text-accent tracking-wider text-center'>
+                could not load anime info please reload the page...
+              </p>
+              <a
+                href={`/anime/${id}`}
+                className='text-xs font-normal text-accent'
+              >{`> reload page`}</a>
+            </>
+          )}
+        </div>
+      </section>
+    );
 
   return (
     <section>
       <div className='my-2 max-w-xs w-full h-[480px] relative'>
         <Image
-          src={anime.images?.webp.large_image_url}
+          src={anime?.images?.webp.large_image_url}
           alt={'anime image'}
           fill
         />
       </div>
       <ul className='flex flex-wrap gap-2 py-2 uppercase font-bold text-xs'>
-        {anime.type && (
+        {anime?.type && (
           <li>
-            <Badge className='text-xs'>{anime.type}</Badge>
+            <Badge className='text-xs'>{anime?.type}</Badge>
           </li>
         )}
-        {anime.season && (
+        {anime?.season && (
           <li>
             <Badge className='text-xs'>
-              {anime.season}
-              {anime.year}
+              {anime?.season}
+              {anime?.year}
             </Badge>
           </li>
         )}
-        {anime.status && (
+        {anime?.status && (
           <li>
-            <Badge className='text-xs'>{anime.status}</Badge>
+            <Badge className='text-xs'>{anime?.status}</Badge>
           </li>
         )}
       </ul>
       <h1 className='text-2xl tracking-wide leading-6 font-medium py-2'>
-        {anime.title}
+        {anime?.title}
       </h1>
 
       {/* synopsis  */}
-      {anime.synopsis && (
+      {anime?.synopsis && (
         <div>
-          <p className='text-xs tracking-widest'>{anime.synopsis}</p>
+          <p className='text-xs tracking-widest'>{anime?.synopsis}</p>
         </div>
       )}
 
-      {anime.trailer.embed_url && (
+      {anime?.trailer.embed_url && (
         <div>
           <h2 className='py-4 text-xl tracking-wider font-medium'>Trailer</h2>
           <iframe
-            src={anime.trailer.embed_url}
+            src={anime?.trailer.embed_url}
             className='aspect-video h-[200px] block w-full'
             allowFullScreen={true}
           />
@@ -77,7 +97,7 @@ export default async function Anime({ id }: { id: string }) {
               Main Title
             </dt>
             <dd className='bg-secondary text-primary px-3 py-2 border-b border-accent'>
-              {anime.title}
+              {anime?.title}
             </dd>
 
             {/* official title */}
@@ -85,7 +105,7 @@ export default async function Anime({ id }: { id: string }) {
               Official Title
             </dt>
             <dd className='bg-secondary text-primary px-3 py-2 border-b border-accent'>
-              {anime.title}
+              {anime?.title}
             </dd>
 
             {/* japanses title */}

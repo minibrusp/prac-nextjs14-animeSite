@@ -26,6 +26,30 @@ export default async function AnimeCharacters({
   // console.log(animeCharacterWithVoiceActors);
   // console.log(filteredCharWithVoiceActors);
 
+  if (filteredCharWithVoiceActors?.length === undefined)
+    return (
+      <section className='my-4'>
+        <div className='flex justify-between items-center my-4'>
+          <h2 className='text-primary text-xl tracking-wider font-medium '>
+            Characters
+          </h2>
+          <Link
+            href={`/anime/${id}/characters`}
+            className='text-xs font-normal text-accent'
+          >{`> All characters (${animeCharacterWithVoiceActors?.length})`}</Link>
+        </div>
+        <div className='flex flex-col justify-center items-center my-4'>
+          <p className='text-xs text-accent tracking-wider text-center'>
+            could not load characters please reload the page...
+          </p>
+          <a
+            href={`/anime/${id}`}
+            className='text-xs font-normal text-accent'
+          >{`> reload page`}</a>
+        </div>
+      </section>
+    );
+
   return (
     <>
       {filteredCharWithVoiceActors?.length > 0 && (

@@ -20,14 +20,38 @@ export default async function AnimeStaffs({
 
   // console.log(animeStaffs);
 
+  if (filteredAnimeStaffs?.length === undefined)
+    return (
+      <section className='my-4'>
+        <div className='flex justify-between items-center my-4'>
+          <h2 className='text-primary text-xl tracking-wider font-medium '>
+            Staffs
+          </h2>
+          <Link
+            href={`/anime/${id}/staffs`}
+            className='text-xs font-normal text-accent'
+          >{`> All staffs (${animeStaffs?.length})`}</Link>
+        </div>
+        <div className='flex flex-col justify-center items-center my-4'>
+          <p className='text-xs text-accent tracking-wider text-center'>
+            could not load staffs please reload the page...
+          </p>
+          <a
+            href={`/anime/${id}`}
+            className='text-xs font-normal text-accent'
+          >{`> reload page`}</a>
+        </div>
+      </section>
+    );
+
   return (
     <>
       {filteredAnimeStaffs?.length > 0 && (
         <section className='my-4 mb-8'>
           <div className='flex justify-between items-center my-4'>
-            <h1 className='text-primary text-xl tracking-wider font-medium '>
+            <h2 className='text-primary text-xl tracking-wider font-medium '>
               Staffs
-            </h1>
+            </h2>
             <Link
               href={`/anime/${id}/staffs`}
               className='text-xs font-normal text-accent'
