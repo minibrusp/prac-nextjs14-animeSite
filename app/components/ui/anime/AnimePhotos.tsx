@@ -87,7 +87,7 @@ export default async function AnimePhotos({
               alt={'anime image'}
               width={150.41}
               height={240}
-              className=''
+              className='sm:max-w-[112px] sm:max-h-[165px]'
             />
           ))}
       </div>

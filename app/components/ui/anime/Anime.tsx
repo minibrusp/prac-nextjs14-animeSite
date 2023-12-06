@@ -39,50 +39,54 @@ export default async function Anime({ id }: { id: string }) {
 
   return (
     <section>
-      <div className='my-2 max-w-xs w-full h-[480px] relative'>
-        <Image
-          src={anime?.images?.webp.large_image_url}
-          alt={'anime image'}
-          fill
-        />
-      </div>
-      <ul className='flex flex-wrap gap-2 py-2 uppercase font-bold text-xs'>
-        {anime?.type && (
-          <li>
-            <Badge className='text-xs'>{anime?.type}</Badge>
-          </li>
-        )}
-        {anime?.season && (
-          <li>
-            <Badge className='text-xs'>
-              {anime?.season}
-              {anime?.year}
-            </Badge>
-          </li>
-        )}
-        {anime?.status && (
-          <li>
-            <Badge className='text-xs'>{anime?.status}</Badge>
-          </li>
-        )}
-      </ul>
-      <h1 className='text-2xl tracking-wide leading-6 font-medium py-2'>
-        {anime?.title}
-      </h1>
-
-      {/* synopsis  */}
-      {anime?.synopsis && (
-        <div>
-          <p className='text-xs tracking-widest'>{anime?.synopsis}</p>
+      <div className='sm:flex sm:flex-row sm:justify-center sm:items-start sm:gap-2'>
+        <div className='my-2 max-w-xs w-full h-[480px] relative sm:min-w-[219px] sm:h-[359px] md:min-w-[343px] md:h-[480px]'>
+          <Image
+            src={anime?.images?.webp.large_image_url}
+            alt={'anime image'}
+            fill
+          />
         </div>
-      )}
+        <div>
+          <ul className='flex flex-wrap gap-2 py-2 uppercase font-bold text-xs'>
+            {anime?.type && (
+              <li>
+                <Badge className='text-xs'>{anime?.type}</Badge>
+              </li>
+            )}
+            {anime?.season && (
+              <li>
+                <Badge className='text-xs'>
+                  {anime?.season}
+                  {anime?.year}
+                </Badge>
+              </li>
+            )}
+            {anime?.status && (
+              <li>
+                <Badge className='text-xs'>{anime?.status}</Badge>
+              </li>
+            )}
+          </ul>
+          <h1 className='text-2xl tracking-wide leading-6 font-medium py-2 sm:py-1'>
+            {anime?.title}
+          </h1>
+
+          {/* synopsis  */}
+          {anime?.synopsis && (
+            <div>
+              <p className='text-xs tracking-widest'>{anime?.synopsis}</p>
+            </div>
+          )}
+        </div>
+      </div>
 
       {anime?.trailer.embed_url && (
         <div>
           <h2 className='py-4 text-xl tracking-wider font-medium'>Trailer</h2>
           <iframe
             src={anime?.trailer.embed_url}
-            className='aspect-video h-[200px] block w-full'
+            className='aspect-video block w-full'
             allowFullScreen={true}
           />
         </div>

@@ -40,7 +40,7 @@ export default async function AnimeTrailers({ id }: { id: string }) {
                 <AccordionContent>
                   <iframe
                     src={trailer.trailer.embed_url}
-                    className='aspect-video h-[200px] w-full'
+                    className='aspect-video w-full'
                     allowFullScreen={true}
                   />
                 </AccordionContent>
