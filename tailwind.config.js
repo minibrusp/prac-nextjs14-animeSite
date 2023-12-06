@@ -80,7 +80,7 @@ module.exports = {
         'anime-main-sm': [
           'image details',
           'info details',
-          'info trailer',
+          'info details',
           'info trailer',
         ],
       },
@@ -88,7 +88,7 @@ module.exports = {
         'anime-main-template-cols': '1fr 1fr',
       },
       gridTemplateRows: {
-        'anime-main-template-rows-sm': '.5fr .2fr 1fr',
+        'anime-main-template-rows-sm': '.5fr .2fr .1fr 1fr',
         'anime-main-template-rows-md': '.8fr .125fr .25fr 1fr',
       },
     },

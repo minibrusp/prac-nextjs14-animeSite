@@ -81,9 +81,7 @@ export default async function Anime({ id }: { id: string }) {
 
       {anime?.trailer.embed_url && (
         <div className='sm:grid-in-trailer'>
-          <h2 className='py-4 text-xl tracking-wider font-medium sm:pt-0'>
-            Trailer
-          </h2>
+          <h2 className='py-4 text-xl tracking-wider font-medium'>Trailer</h2>
           <iframe
             src={anime?.trailer.embed_url}
             className='aspect-video block w-full'
