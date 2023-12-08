@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '../badge';
 import { formatDate } from '@/lib/utils';
+import Review from '../review';
 
 export default async function AnimeReviews({
   id,
@@ -101,10 +102,7 @@ export default async function AnimeReviews({
                     </div>
                     <span className='whitespace-nowrap text-xs font-normal text-accent'>{`Rating: ${review.score}`}</span>
                   </div>
-                  <p className='text-xs text-primary tracking-widest'>{`${review.review.slice(
-                    0,
-                    450
-                  )}...`}</p>
+                  <Review review={review.review} />
                 </div>
               )
             )}

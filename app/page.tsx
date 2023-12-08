@@ -1,4 +1,3 @@
-import LoadMore from './components/LoadMore';
 import { Suspense } from 'react';
 import PopularAnimes from './components/PopularAnimes';
 import Loading from './loading';
