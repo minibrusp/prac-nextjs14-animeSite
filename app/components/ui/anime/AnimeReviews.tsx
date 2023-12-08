@@ -24,7 +24,7 @@ export default async function AnimeReviews({
 
   if (filteredAnimeReviews?.length === undefined)
     return (
-      <section className='my-4 mb-8'>
+      <section className='my-4 mb-8 sm:grid-in-reviews'>
         <div className='flex justify-between items-center my-4'>
           <h2 className='text-primary text-xl tracking-wider font-medium '>
             Reviews
@@ -53,7 +53,7 @@ export default async function AnimeReviews({
   return (
     <>
       {filteredAnimeReviews?.length > 0 && (
-        <section className='my-4 mb-8'>
+        <section className='my-4 mb-8 sm:grid-in-reviews'>
           <div className='flex justify-between items-center my-2 border-b border-accent p-2'>
             <h2 className='text-primary text-xl tracking-wider font-medium '>
               Reviews
@@ -66,7 +66,10 @@ export default async function AnimeReviews({
           <div className='flex flex-col flex-wrap items-center justify-start gap-4 w-full'>
             {filteredAnimeReviews?.map(
               (review: TypeAnimeReview, index: number) => (
-                <div key={index} className='border-b border-accent pb-4'>
+                <div
+                  key={index}
+                  className='border-b border-accent pb-4 last-of-type:border-transparent'
+                >
                   <div className='flex flex-row justify-between items-start w-full py-2'>
                     <div className='flex flex-row justify-stretch gap-2 items-stretch w-full'>
                       <div>

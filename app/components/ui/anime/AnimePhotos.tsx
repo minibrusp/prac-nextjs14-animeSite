@@ -67,17 +67,17 @@ export default async function AnimePhotos({
     );
 
   return (
-    <section className='my-4 mb-8'>
+    <section className='my-4 mb-8 sm:grid-in-gallery sm:self-start sm:justify-self-center sm:mt-0 lg:justify-self-start lg:my-0'>
       <div className='flex justify-between items-center my-4'>
-        <h1 className='text-primary text-xl tracking-wider font-medium '>
+        <h2 className='text-primary text-xl tracking-wider font-medium '>
           Gallery
-        </h1>
+        </h2>
         <Link
           href={`/anime/${id}/photos`}
           className='text-xs font-normal text-accent'
         >{`> All photos (${animePhotos?.length})`}</Link>
       </div>
-      <div className='flex flex-row flex-wrap items-center justify-center gap-2'>
+      <div className='flex flex-row flex-wrap items-center justify-center gap-2 lg:justify-start'>
         {animePhotos?.length === undefined && <div>could not load photos</div>}
         {filteredAnimePhotos?.length > 0 &&
           filteredAnimePhotos?.map((photo: animeImage, index: number) => (

@@ -1,12 +1,15 @@
 import Breadcrumbs from '@/app/components/ui/Breadcrumbs';
 import Anime from '@/app/components/ui/anime/Anime';
-import AnimeCharacters from '@/app/components/ui/anime/AnimeCharacters';
-import AnimePhotos from '@/app/components/ui/anime/AnimePhotos';
-import AnimeReviews from '@/app/components/ui/anime/AnimeReviews';
-import AnimeStaffs from '@/app/components/ui/anime/AnimeStaffs';
-import AnimeTrailers from '@/app/components/ui/anime/AnimeTrailers';
 import Loading from '@/app/loading';
+import { Metadata } from 'next';
 import React, { Suspense } from 'react';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | MEOW',
+    default: 'Anime',
+  },
+};
 
 export default function page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -25,26 +28,6 @@ export default function page({ params }: { params: { id: string } }) {
 
       <Suspense fallback={<Loading />}>
         <Anime id={id} />
-      </Suspense>
-
-      <Suspense fallback={<Loading />}>
-        <AnimeCharacters id={id} limit={6} />
-      </Suspense>
-
-      <Suspense fallback={<Loading />}>
-        <AnimePhotos id={id} limit={6} />
-      </Suspense>
-
-      <Suspense fallback={<Loading />}>
-        <AnimeTrailers id={id} />
-      </Suspense>
-
-      <Suspense fallback={<Loading />}>
-        <AnimeStaffs id={id} limit={6} />
-      </Suspense>
-
-      <Suspense fallback={<Loading />}>
-        <AnimeReviews id={id} limit={5} />
       </Suspense>
     </main>
   );

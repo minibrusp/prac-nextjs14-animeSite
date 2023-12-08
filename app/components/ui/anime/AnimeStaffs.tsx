@@ -47,7 +47,7 @@ export default async function AnimeStaffs({
   return (
     <>
       {filteredAnimeStaffs?.length > 0 && (
-        <section className='my-4 mb-8'>
+        <section className='my-4 mb-8 sm:grid-in-staffs'>
           <div className='flex justify-between items-center my-4'>
             <h2 className='text-primary text-xl tracking-wider font-medium '>
               Staffs

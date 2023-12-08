@@ -53,11 +53,11 @@ export default async function AnimeCharacters({
   return (
     <>
       {filteredCharWithVoiceActors?.length > 0 && (
-        <section className='my-4'>
+        <section className='my-4 sm:grid-in-chars'>
           <div className='flex justify-between items-center my-4'>
-            <h1 className='text-primary text-xl tracking-wider font-medium '>
+            <h2 className='text-primary text-xl tracking-wider font-medium '>
               Characters
-            </h1>
+            </h2>
             <Link
               href={`/anime/${id}/characters`}
               className='text-xs font-normal text-accent'

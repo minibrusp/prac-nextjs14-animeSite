@@ -2,6 +2,16 @@ import LoadMore from './components/LoadMore';
 import { Suspense } from 'react';
 import PopularAnimes from './components/PopularAnimes';
 import Loading from './loading';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | MEOW',
+    default: 'MEOW',
+  },
+  description: 'The official MEOW anime review app',
+  metadataBase: new URL('https://delicate-bubblegum-8544e9.netlify.app/'),
+};
 
 export default async function Home({
   searchParams,

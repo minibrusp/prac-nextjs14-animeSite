@@ -1,4 +1,4 @@
-import { fetchAnimeById, fetchAnimePhotosById } from '@/app/lib/actions';
+import { fetchAnimeById } from '@/app/lib/actions';
 import { Badge } from '../badge';
 import {
   Anime as TypeAnime,
@@ -10,6 +10,13 @@ import {
 import Image from 'next/image';
 import { addComma, formatDate } from '@/lib/utils';
 import Link from 'next/link';
+import { Suspense } from 'react';
+import Loading from '@/app/anime/loading';
+import AnimeCharacters from './AnimeCharacters';
+import AnimePhotos from './AnimePhotos';
+import AnimeTrailers from './AnimeTrailers';
+import AnimeStaffs from './AnimeStaffs';
+import AnimeReviews from './AnimeReviews';
 
 export default async function Anime({ id }: { id: string }) {
   const anime: TypeAnime = await fetchAnimeById(id);
@@ -38,8 +45,8 @@ export default async function Anime({ id }: { id: string }) {
     );
 
   return (
-    <section className='sm:grid sm:grid-areas-anime-main-sm sm:content-start sm:justify-center sm:grid-cols-anime-main-template-cols sm:gap-4 sm:grid-rows-anime-main-template-rows-sm md:grid-areas-anime-main-md md:grid-rows-anime-main-template-rows-md'>
-      <div className='my-2 max-w-xs w-full h-[480px] relative sm:min-w-[219px] sm:h-[359px] md:min-w-[343px] md:h-[480px] sm:grid-in-image md:self-center md:justify-self-center'>
+    <section className='sm:grid sm:justify-items-stretch sm:place-items-stretch sm:grid-areas-anime-main-sm sm:content-start sm:justify-center sm:grid-cols-anime-main-template-cols sm:grid-rows-anime-main-sm sm:gap-4 md:grid-areas-anime-main-md md:grid-cols-anime-main-md lg:grid-areas-anime-main-lg lg:gap-y-0 lg:gap-x-8 xl:grid-areas-anime-main-xl xl:grid-cols-anime-main-xl'>
+      <div className='my-2 max-w-xs w-full h-[480px] relative sm:min-w-[219px] sm:h-[359px] md:min-w-[343px] md:h-[480px] sm:grid-in-image md:self-center md:justify-self-center xl:min-h-[594px] xl:min-w-[400px]'>
         <Image
           src={anime?.images?.webp.large_image_url}
           alt={'anime image'}
@@ -79,13 +86,17 @@ export default async function Anime({ id }: { id: string }) {
         )}
       </div>
 
+      {/* trailer  */}
       {anime?.trailer.embed_url && (
-        <div className='sm:grid-in-trailer'>
-          <h2 className='py-4 text-xl tracking-wider font-medium'>Trailer</h2>
+        <div className='sm:grid-in-trailer xl:my-4'>
+          <h2 className='py-4 text-xl tracking-wider font-medium sm:p-0'>
+            Trailer
+          </h2>
           <iframe
             src={anime?.trailer.embed_url}
-            className='aspect-video block w-full'
+            className='aspect-video block w-full md:max-w-lg'
             allowFullScreen={true}
+            title={`${anime.title}'s trailer video`}
           />
         </div>
       )}
@@ -286,6 +297,26 @@ export default async function Anime({ id }: { id: string }) {
           </dl>
         </div>
       </div>
+
+      <Suspense fallback={<Loading />}>
+        <AnimePhotos id={id} limit={6} />
+      </Suspense>
+
+      <Suspense fallback={<Loading />}>
+        <AnimeTrailers id={id} />
+      </Suspense>
+
+      <Suspense fallback={<Loading />}>
+        <AnimeCharacters id={id} limit={6} />
+      </Suspense>
+
+      <Suspense fallback={<Loading />}>
+        <AnimeStaffs id={id} limit={6} />
+      </Suspense>
+
+      <Suspense fallback={<Loading />}>
+        <AnimeReviews id={id} limit={5} />
+      </Suspense>
     </section>
   );
 }
