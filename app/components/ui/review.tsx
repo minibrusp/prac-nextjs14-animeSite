@@ -6,7 +6,7 @@ export default function Review({ review }: { review: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const clickHandler = () => {
-    setIsOpen((old) => !isOpen);
+    setIsOpen((old) => !old);
   };
 
   return (
