@@ -109,8 +109,8 @@ export type Anime = {
     prop: {
       from: date;
       to: date;
-      string: 'string';
     };
+    string: 'string';
   };
   duration: 'string';
   rating: animeRating;

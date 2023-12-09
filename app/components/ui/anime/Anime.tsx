@@ -21,7 +21,7 @@ import AnimeReviews from './AnimeReviews';
 export default async function Anime({ id }: { id: string }) {
   const anime: TypeAnime = await fetchAnimeById(id);
 
-  // console.log(anime);
+  console.log(anime);
 
   // if (!anime) throw new Error('could not fetch anime');
 
@@ -164,7 +164,8 @@ export default async function Anime({ id }: { id: string }) {
               Aired
             </dt>
             <dd className='bg-secondary text-primary px-3 py-2 border-b border-primary'>
-              {formatDate(anime.aired.from)} to {formatDate(anime.aired.to)}
+              {/* {formatDate(anime.aired.from)} to {formatDate(anime.aired.to)} */}
+              {anime.aired.string}
             </dd>
 
             {/* premiered  */}
